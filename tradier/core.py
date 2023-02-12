@@ -1,7 +1,7 @@
 import json
 
 
-class Tradier(object):
+class Tradier():
     def __init__(self, httpclient, token):
         self.httpclient = httpclient
         self.token = token
@@ -21,6 +21,7 @@ class Tradier(object):
             data=None,
             callback=None):
 
+        print('token=', self.token)
         headers = headers or {}
         headers['Authorization'] = 'Bearer %s' % self.token
         headers['Accept'] = 'application/json'
@@ -35,15 +36,16 @@ class Tradier(object):
         else:
             cb = lambda x: callback(base_callback(x))
 
-        return self.httpclient.request(
-            cb,
-            method,
-            path,
-            headers=headers,
-            params=params,
-            data=data)
+        r = self.httpclient.request(
+                cb,
+                method,
+                path,
+                headers=headers,
+                params=params,
+                data=data)
+        return r
 
-    class User(object):
+    class User():
         def __init__(self, agent):
             self.agent = agent
 
@@ -55,7 +57,7 @@ class Tradier(object):
             response = self.agent.request('GET', 'user/balances')
             return response
 
-    class Accounts(object):
+    class Accounts():
         def __init__(self, agent):
             self.agent = agent
 
@@ -69,7 +71,7 @@ class Tradier(object):
                 'GET', 'accounts/%s/orders/%s' % (account_id, order_id))
             return response
 
-    class Markets(object):
+    class Markets():
         def __init__(self, agent):
             self.agent = agent
 
@@ -85,7 +87,7 @@ class Tradier(object):
                 params={'symbols': ','.join(symbols)},
                 callback=callback)
 
-    class Fundamentals(object):
+    class Fundamentals():
         def __init__(self, agent):
             self.agent = agent
 
@@ -98,7 +100,7 @@ class Tradier(object):
                 params={'symbols': ','.join(x.upper() for x in symbols)},
                 callback=callback)
 
-    class Options(object):
+    class Options():
         def __init__(self, agent):
             self.agent = agent
 
@@ -120,7 +122,7 @@ class Tradier(object):
                 params={'symbol': symbol, 'expiration': expiration},
                 callback=callback)
 
-    class Watchlists(object):
+    class Watchlists():
         def __init__(self, agent):
             self.agent = agent
 

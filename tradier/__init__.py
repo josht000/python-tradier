@@ -14,7 +14,7 @@ def Tradier(token, endpoint='brokerage'):
     return core.Tradier(httpclient, token)
 
 
-class vanilla(object):
+class vanilla():
     @classmethod
     def Tradier(klass, h, token, endpoint='brokerage'):
         httpclient = http.vanilla.Client(h, endpoints[endpoint])

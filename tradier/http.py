@@ -1,5 +1,5 @@
 import collections
-import urlparse
+from urllib.parse import urlparse
 import urllib
 
 
