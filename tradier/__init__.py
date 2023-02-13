@@ -6,7 +6,8 @@ endpoints = {
     'staging': 'https://sandbox.tradier.com/v1/',
     'brokerage': 'https://api.tradier.com/v1/',
     'streaming': 'https://stream.tradier.com/v1/',
-    'beta': 'https://api.tradier.com/beta/', }
+    'beta': 'https://api.tradier.com/beta/',
+    'sandbox': 'https://sandbox.tradier.com/v1/'}
 
 
 def Tradier(token, endpoint='brokerage'):

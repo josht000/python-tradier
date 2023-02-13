@@ -1,5 +1,14 @@
 import json
 
+class Order():
+    def __init__(self) -> None:
+        self._class = None # equity
+        self.symbol:str = None
+        self.side:str = None # buy, buy_to_cover, sell, sell_short
+        self.quantity: int = None
+        self.type: str = None # market, limit, stop, stop_limit
+        self.price: str = None # optional for market orders
+        self.stop: str = None  # optional unless a stop type order
 
 class Tradier():
     def __init__(self, httpclient, token):
@@ -11,6 +20,8 @@ class Tradier():
         self.fundamentals = Tradier.Fundamentals(self)
         self.options = Tradier.Options(self)
         self.watchlists = Tradier.Watchlists(self)
+        self.order = Tradier.Order(self)
+        self.account_id = None
 
     def request(
             self,
@@ -21,7 +32,7 @@ class Tradier():
             data=None,
             callback=None):
 
-        print('token=', self.token)
+        # print('token=', self.token)
         headers = headers or {}
         headers['Authorization'] = 'Bearer %s' % self.token
         headers['Accept'] = 'application/json'
@@ -58,6 +69,8 @@ class Tradier():
             return response
 
     class Accounts():
+        '''Gets account status like current orders. '''
+
         def __init__(self, agent):
             self.agent = agent
 
@@ -145,4 +158,12 @@ class Tradier():
         def delete(self, watchlist_id):
             response = self.agent.request(
                 'DELETE', 'watchlists/%s' % watchlist_id)
+            return response['watchlists']['watchlist']
+
+    class Order():
+        def __init__(self, agent) -> None:
+            self.agent = agent
+
+        def placeEquity(self, order:Order):
+            response = self.agent.request('POST', 'watchlists')
             return response['watchlists']['watchlist']

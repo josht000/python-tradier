@@ -43,3 +43,6 @@ pip-log.txt
 
 # Ropemacs
 .ropeproject
+
+# VS Code
+.vscode/

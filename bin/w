@@ -52,7 +52,7 @@ def do_calc(code, typ, strike, num):
                 (total / expires_in) / (num * 100),
                 )
 
-        print '%s  %3s %6.02f  %6.03f%s' % (
+        print('%s  %3s %6.02f  %6.03f%s' % (
             expiration.strftime('%Y-%m-%d'),
             expires_in,
             mid,
